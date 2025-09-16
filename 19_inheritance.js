@@ -42,24 +42,24 @@
 // console.log(o.speaks());
 
 //parent class
-class Rectangle{
-    constructor(length){
-        this.length=length;
+// class Rectangle{
+//     constructor(length){
+//         this.length=length;
         
-    }
-    area(){
-       return this.length*this.length;
+//     }
+//     area(){
+//        return this.length*this.length;
 
-    }
-}
-class Square extends Rectangle {
-    constructor(length){
-        super(length)
-    }
-}
+//     }
+// }
+// class Square extends Rectangle {
+//     constructor(length){
+//         super(length)
+//     }
+// }
 //create instance
-const rect= new Square(6)
-console.log(rect.area());
+// const rect= new Square(6)
+// console.log(rect.area());
 
 class Employees{
     constructor(name,age,designation){
@@ -69,7 +69,7 @@ class Employees{
     }
     //create methods
     getEmployeeDetails(){
-        return `Name of  employee ${this.name} age of ${this.age} having ${this.designation}`
+        return this.name, this.age,this.designation
     }
 }
 class Engineers extends Employees{
@@ -80,3 +80,22 @@ class Engineers extends Employees{
 //create instances
 const employees= new Employees("Rhea Rhea", 21, "SWE Intern");
 console.log(employees);
+
+//using prototype
+//parent class
+function Rectangle(length,breadth){
+    this.length=length;
+    this.breadth=breadth;
+}
+Rectangle.prototype.area= function(){
+    return this.length*this.breadth;
+}
+function Square(length){
+    Rectangle.call(this, length)
+    
+}
+Square.prototype=Object.create(Rectangle.prototype)
+Square.prototype.constructor=Square;
+
+const sq= new Square(5)
+console.log(sq.area());
